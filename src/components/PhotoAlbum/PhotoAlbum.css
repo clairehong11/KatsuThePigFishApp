@@ -1,0 +1,64 @@
+.PhotoAlbumContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 75%;
+}
+.PhotoAlbum {
+  display: flex;
+  background-color: white;
+  height: 100%;
+}
+.Page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+.Page.odd {
+  border-right: 1px solid black;
+}
+.hidden {
+  display: none;
+}
+.album-photo {
+  display: flex;
+  width: 50%;
+  height: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.album-photo img {
+  width: 100%;
+  object-fit: cover;
+}
+.page-footer {
+  position: absolute;
+  bottom: 5px;
+  text-align: center;
+}
+.pagination {
+  display: flex;
+  padding-top: 8px;
+}
+.prev-page,
+.next-page {
+  width: 50%;
+}
+.prev-btn,
+.next-btn {
+  cursor: pointer;
+  padding: 4px 8px;
+  background-color: brown;
+  color: white;
+  width: fit-content;
+}
+.next-btn {
+  float: right;
+}
