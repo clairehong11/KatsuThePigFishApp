@@ -1,0 +1,33 @@
+.Page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+.Page.odd {
+  border-right: 1px solid black;
+}
+.hidden {
+  display: none;
+}
+.album-photo {
+  display: flex;
+  width: 50%;
+  height: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.album-photo img {
+  width: 100%;
+  object-fit: cover;
+}
+.page-footer {
+  position: absolute;
+  bottom: 5px;
+  text-align: center;
+}
