@@ -4,14 +4,16 @@
   background-color: black;
 }
 .close-btn {
+  position: absolute;
+  right: 20px;
   color: white;
   float: right;
-  padding: 0 20px;
   font-size: 45px;
   cursor: pointer;
   font-weight: 100;
+  z-index: 2;
 }
-.selected-image {
+.selected-entry {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -20,9 +22,18 @@
   height: auto;
   max-width: 100%;
   display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.date-captured,
+.description {
+  color: white;
 }
 .left-arrow,
 .right-arrow {
+  position: absolute;
+  height: 100%;
+  margin-top: -15px;
   font-size: 100px;
   color: white;
   display: flex;
@@ -30,8 +41,9 @@
   cursor: pointer;
 }
 .left-arrow {
-  padding-right: 20px;
+  margin-left: 25px;
 }
 .right-arrow {
-  padding-left: 20px;
+  right: 0;
+  margin-right: 25px;
 }

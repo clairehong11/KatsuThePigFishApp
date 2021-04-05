@@ -1,30 +1,37 @@
 import React from 'react';
 import './Page.css';
 
-const Page = ({ pageNumber, isVisible, images, toggleCarousel }) => {
+const Page = ({ pageNumber, isVisible, albumEntries, toggleCarousel }) => {
   const isEven = pageNumber%2 === 0;
 
   return (
     <div className={`Page ${!isVisible ? "hidden" : ""} ${isEven ? "even" : "odd"}`}>
-      {images.map((imgSrc, index) => {
+      {albumEntries.map((entry, index) => {
         if (!isEven) {
           return (
             index < 4 && <div
-              key={index}
-              className="album-photo" 
-              onClick={(e) => toggleCarousel({ src: e.target.src, index: index })}
+              key={entry._id}
+              className="album-entry" 
+              onClick={(e) => toggleCarousel({ data: entry, index })}
             >
-              <img src={imgSrc} alt="Katsu"/>
+              <div className="container">
+                <img src={entry.mediaUrl} alt="Katsu"/>
+                {(entry.description || entry.dateCaptured) && <div 
+                  className="overlay">
+                    {entry.dateCaptured && <div className="date-captured">{entry.dateCaptured}</div>}
+                    {entry.description && <div className="description">{entry.description}</div>}
+                </div>}
+              </div>
             </div>
           );
         } else {
           return (
             index >=4 && <div
               key={index}
-              className="album-photo" 
-              onClick={(e) => toggleCarousel({ src: e.target.src, index: index })}
+              className="album-entry" 
+              onClick={(e) => toggleCarousel({ data: entry, index })}
             >
-              <img src={imgSrc} alt="Katsu"/>
+              <img src={entry.mediaUrl} alt="Katsu"/>
             </div>
           );
         }
