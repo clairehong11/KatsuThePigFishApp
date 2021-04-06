@@ -1,5 +1,5 @@
 import React from 'react';
-import './Page.css';
+import './Page.scss';
 
 const Page = ({ pageNumber, isVisible, albumEntries, toggleCarousel }) => {
   const isEven = pageNumber%2 === 0;

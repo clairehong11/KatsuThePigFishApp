@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import './Carousel.css';
+import './Carousel.scss';
 
 const Carousel = ({ toggleCarousel, selectedEntry, setSelectedEntry }) => {
   useEffect(() => {
@@ -22,13 +22,13 @@ const Carousel = ({ toggleCarousel, selectedEntry, setSelectedEntry }) => {
   return (
     <div className="Carousel">
       <div className="close-btn" onClick={() => toggleCarousel()}>&times;</div>
-      <div className="left-arrow" onClick={() => setSelectedEntry(selectedEntry.index-1)}>&lsaquo;</div>
+      <div className="date-captured">{selectedEntry.data.dateCaptured}</div>
       <div className="selected-entry">
-        {selectedEntry.data.dateCaptured && <div className="date-captured">{selectedEntry.data.dateCaptured}</div>}
+        <div className="left-arrow" onClick={() => setSelectedEntry(selectedEntry.index-1)}>&lsaquo;</div>
         <img src={selectedEntry.data.mediaUrl} alt="Katsu"/>
-        {selectedEntry.data.description && <div className="description">{selectedEntry.data.description}</div>}
+        <div className="right-arrow" onClick={() => setSelectedEntry(selectedEntry.index+1)}>&rsaquo;</div>
       </div>
-      <div className="right-arrow" onClick={() => setSelectedEntry(selectedEntry.index+1)}>&rsaquo;</div>
+      <div className="description">{selectedEntry.data.description}</div>
     </div>
   ); 
 };

@@ -5,7 +5,7 @@ import Carousel from './Carousel';
 
 import { getAlbumEntriesByPage } from '../../services/albumEntriesService';
 
-import './PhotoAlbum.css';
+import './PhotoAlbum.scss';
 
 class PhotoAlbum extends Component {
 
@@ -93,30 +93,27 @@ class PhotoAlbum extends Component {
       );
     }
     return (
-      <>
-        <h2 className="header">Katsu the Pig Fish</h2>
-        <div className="PhotoAlbumContainer">
-          <div className="PhotoAlbum">
-            {albumEntries?.length && [...Array(totalCount)].map((e, index) => 
-              <Page
-                key={index}
-                pageNumber={index+1}
-                isVisible={this.isVisible(index+1)} 
-                albumEntries={albumEntries}
-                toggleCarousel={this.toggleCarousel}
-              />
-            )}
+      <div className="PhotoAlbumContainer">
+        <div className="PhotoAlbum">
+          {albumEntries?.length && [...Array(totalCount)].map((e, index) => 
+            <Page
+              key={index}
+              pageNumber={index+1}
+              isVisible={this.isVisible(index+1)} 
+              albumEntries={albumEntries}
+              toggleCarousel={this.toggleCarousel}
+            />
+          )}
+        </div>
+        <div className="pagination">
+          <div className="prev-page">
+            {leftPage > 1 && <div className="prev-btn" onClick={() => this.flipPage('PREV')}>Prev Page</div>}
           </div>
-          <div className="pagination">
-            <div className="prev-page">
-              {leftPage > 1 && <div className="prev-btn" onClick={() => this.flipPage('PREV')}>Prev Page</div>}
-            </div>
-            <div className="next-page">
-              {rightPage < totalCount && <div className="next-btn" onClick={() => this.flipPage('NEXT')}>Next Page</div>}
-            </div>
+          <div className="next-page">
+            {rightPage < totalCount && <div className="next-btn" onClick={() => this.flipPage('NEXT')}>Next Page</div>}
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }
