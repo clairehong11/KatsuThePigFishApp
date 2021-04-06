@@ -21,12 +21,12 @@
   .date-captured {
     display: flex;
     align-items: flex-end;
-    margin-bottom: 4px;
   }
   .date-captured,
   .description {
     color: white;
     height: 15%;
+    margin: 4px;
   }
 
   .selected-entry {
@@ -37,10 +37,12 @@
     height: 70%;
     padding: 0 25px;
     box-sizing: border-box;
-    img {
+    img,
+    video {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
+      outline: none;
     }
     .left-arrow,
     .right-arrow {

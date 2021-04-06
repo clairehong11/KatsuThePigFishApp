@@ -73,6 +73,15 @@ class PhotoAlbum extends Component {
     this.setState({ selectedEntry: selectedEntry });
   };
 
+  isImage = (mediaUrl) => {
+    const fileExt = mediaUrl.split(".").pop().toLowerCase();
+    console.log(fileExt);
+    if (["mp4", "mov"].includes(fileExt)) {
+      return false;
+    }
+    return true;
+  };
+
   render() {
     const {
       leftPage,
@@ -89,6 +98,7 @@ class PhotoAlbum extends Component {
           toggleCarousel={this.toggleCarousel}
           selectedEntry={selectedEntry}
           setSelectedEntry={this.setSelectedEntry}
+          isImage={this.isImage}
         />
       );
     }
@@ -102,6 +112,7 @@ class PhotoAlbum extends Component {
               isVisible={this.isVisible(index+1)} 
               albumEntries={albumEntries}
               toggleCarousel={this.toggleCarousel}
+              isImage={this.isImage}
             />
           )}
         </div>

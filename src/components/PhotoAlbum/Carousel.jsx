@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import './Carousel.scss';
 
-const Carousel = ({ toggleCarousel, selectedEntry, setSelectedEntry }) => {
+const Carousel = ({ toggleCarousel, selectedEntry, setSelectedEntry, isImage }) => {
   useEffect(() => {
     const navigateCarousel = (e) => {
       if (e.keyCode === 37) {
@@ -25,7 +25,11 @@ const Carousel = ({ toggleCarousel, selectedEntry, setSelectedEntry }) => {
       <div className="date-captured">{selectedEntry.data.dateCaptured}</div>
       <div className="selected-entry">
         <div className="left-arrow" onClick={() => setSelectedEntry(selectedEntry.index-1)}>&lsaquo;</div>
-        <img src={selectedEntry.data.mediaUrl} alt="Katsu"/>
+        {isImage(selectedEntry.data.mediaUrl) ? 
+          <img src={selectedEntry.data.mediaUrl} alt="Katsu"/> : 
+          <video controls>
+            <source src={selectedEntry.data.mediaUrl} type="video/mp4"></source>
+          </video>}
         <div className="right-arrow" onClick={() => setSelectedEntry(selectedEntry.index+1)}>&rsaquo;</div>
       </div>
       <div className="description">{selectedEntry.data.description}</div>

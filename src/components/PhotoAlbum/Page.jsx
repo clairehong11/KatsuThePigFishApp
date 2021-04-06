@@ -1,7 +1,24 @@
 import React from 'react';
 import './Page.scss';
 
-const Page = ({ pageNumber, isVisible, albumEntries, toggleCarousel }) => {
+const AlbumEntry = ({ entry, index, toggleCarousel, isImage }) => <div
+  className="album-entry" 
+  onClick={(e) => toggleCarousel({ data: entry, index })}
+>
+  <div className="container">
+    {isImage(entry.mediaUrl) ? <img src={entry.mediaUrl} alt="Katsu"/> : <video controls>
+      <source src={entry.mediaUrl} type="video/mp4"></source>
+    </video>}
+    
+    {(entry.description || entry.dateCaptured) && <div 
+        className="overlay">
+          {entry.dateCaptured && <div className="date-captured">{entry.dateCaptured}</div>}
+          {entry.description && <div className="description">{entry.description}</div>}
+      </div>}
+  </div>
+</div>;
+
+const Page = ({ pageNumber, isVisible, albumEntries, toggleCarousel, isImage }) => {
   const isEven = pageNumber%2 === 0;
 
   return (
@@ -9,30 +26,11 @@ const Page = ({ pageNumber, isVisible, albumEntries, toggleCarousel }) => {
       {albumEntries.map((entry, index) => {
         if (!isEven) {
           return (
-            index < 4 && <div
-              key={entry._id}
-              className="album-entry" 
-              onClick={(e) => toggleCarousel({ data: entry, index })}
-            >
-              <div className="container">
-                <img src={entry.mediaUrl} alt="Katsu"/>
-                {(entry.description || entry.dateCaptured) && <div 
-                  className="overlay">
-                    {entry.dateCaptured && <div className="date-captured">{entry.dateCaptured}</div>}
-                    {entry.description && <div className="description">{entry.description}</div>}
-                </div>}
-              </div>
-            </div>
+            index < 4 && <AlbumEntry key={entry._id} entry={entry} index={index} toggleCarousel={toggleCarousel} isImage={isImage}/>
           );
         } else {
           return (
-            index >=4 && <div
-              key={index}
-              className="album-entry" 
-              onClick={(e) => toggleCarousel({ data: entry, index })}
-            >
-              <img src={entry.mediaUrl} alt="Katsu"/>
-            </div>
+            index >=4 && <AlbumEntry key={entry._id} entry={entry} index={index} toggleCarousel={toggleCarousel} isImage={isImage}/>
           );
         }
       })}
