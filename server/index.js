@@ -1,9 +1,11 @@
+require('./config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const db = require('./db');
 const albumEntryRouter = require('./routes/albumEntry-router');
+const fileUploadRouter = require('./routes/fileUpload-router');
 
 const app = express();
 const apiPort = process.env.PORT || 8000;
@@ -19,6 +21,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });
-app.use('/api', albumEntryRouter);
+app.use('/api', albumEntryRouter, fileUploadRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
