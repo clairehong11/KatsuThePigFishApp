@@ -1,0 +1,47 @@
+.CreateEntryForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+
+  .container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: fit-content;
+    background: white;
+    border: 1px solid black;
+    padding: 10px 25px 25px;
+
+    h2 {
+      border-bottom: 1px solid black;
+      padding-bottom: 10px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+      input[type="text"] {
+        height: 32px;
+        font-size: 14px;
+      }
+      textarea {
+        min-height: 80px;
+        max-height: 80px;
+        max-width: 100%;
+        min-width: 100%;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+    }
+    .submit-btn {
+      margin-top: 10px;
+    }
+  }
+}
