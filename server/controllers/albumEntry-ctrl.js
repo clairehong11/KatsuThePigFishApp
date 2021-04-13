@@ -3,7 +3,6 @@ const AlbumEntry = require('../models/albumEntry-model');
 createAlbumEntry = (req, res) => {
     const body = req.body;
 
-    console.log('TEST', body);
     if (!body) {
         return res.status(400).json({
             success: false,
@@ -76,13 +75,6 @@ deleteAlbumEntry = async (req, res) => {
     await AlbumEntry.findOneAndDelete({ _id: req.params.id }, (err, albumEntry) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
-        }
-
-        if (!albumEntry) {
-            return res.status(400).json({
-                success: false,
-                error: 'Album Entry not found'
-            })
         }
 
         return res.status(200).json({ success: true, data: albumEntry });
