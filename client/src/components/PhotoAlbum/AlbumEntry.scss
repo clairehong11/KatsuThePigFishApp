@@ -1,0 +1,67 @@
+.AlbumEntry {
+  display: flex;
+  width: 50%;
+  height: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  .container {
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+    .delete-btn {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      opacity: 0;
+      background-color: black;
+      transition: 0.3s;
+      display: flex;
+      justify-content: center;
+      height: 24px;
+      width: 24px;
+      color: white;
+      border-radius: 50%;
+      font-weight: bold;
+      z-index: 2;
+    }
+    &:hover .delete-btn {
+      opacity: 0.8;
+    }
+    img,
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 1px solid #333;
+      border-radius: 4px;
+    }
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      background-color: black;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: fit-content;
+      width: 100%;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+      .date-captured {
+        margin-bottom: 4px;
+      }
+      .description {
+        margin-top: 4px;
+      }
+    }
+    &:hover .overlay {
+      opacity: 0.7;
+    }
+  }
+}

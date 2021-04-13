@@ -35,7 +35,7 @@ const CreateEntryForm = ({ setIsOpen }) => {
   return (
     <div className="CreateEntryForm" onClick={handleClickOutside}>
       <div className="container">
-        <h2>Add a photo or video</h2>
+        <h2>Add Album Entry</h2>
           <form>
             <div className="form-field">
               <input 

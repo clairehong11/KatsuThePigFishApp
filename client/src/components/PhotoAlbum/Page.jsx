@@ -1,24 +1,7 @@
 import React from 'react';
-import './Page.scss';
+import AlbumEntry from './AlbumEntry';
 
-const AlbumEntry = ({ entry, index, toggleCarousel, isImage }) => <div
-  className="album-entry" 
->
-  <div 
-    className="container"
-    onClick={(e) => toggleCarousel({ data: entry, index })}
-  >
-    {isImage(entry.mediaUrl) ? <img src={entry.mediaUrl} alt="Katsu"/> : <video controls>
-      <source src={entry.mediaUrl} type="video/mp4"></source>
-    </video>}
-    
-    {(entry.description || entry.dateCaptured) && <div 
-        className="overlay">
-          {entry.dateCaptured && <div className="date-captured">{entry.dateCaptured}</div>}
-          {entry.description && <div className="description">{entry.description}</div>}
-      </div>}
-  </div>
-</div>;
+import './Page.scss';
 
 const Page = ({ pageNumber, isVisible, albumEntries, toggleCarousel, isImage }) => {
   const isEven = pageNumber%2 === 0;
