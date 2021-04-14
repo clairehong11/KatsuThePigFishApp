@@ -3,7 +3,7 @@ import { deleteAlbumEntry } from '../../services/albumEntriesService';
 
 import './DeleteWarning.scss';
 
-const DeleteWarning = ({ albumEntryId, setIsOpen }) => {
+const DeleteWarning = ({ albumEntryId, setIsOpen, setAlbumEntries }) => {
 
   const handleClickOutside = (e) => {
     if (e.target.className === "DeleteWarning") {
@@ -26,7 +26,8 @@ const DeleteWarning = ({ albumEntryId, setIsOpen }) => {
           </button>
           <button type="button" onClick={() => {
             deleteAlbumEntry(albumEntryId)
-              .then(() => {
+              .then(response => {
+                setAlbumEntries();
                 setIsOpen(false);
               })
             }}

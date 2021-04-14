@@ -3,35 +3,25 @@ import AlbumEntry from './AlbumEntry';
 
 import './Page.scss';
 
-const Page = ({ pageNumber, isVisible, albumEntries, toggleCarousel, isImage }) => {
-  const isEven = pageNumber%2 === 0;
+const Page = ({ 
+  pageNumber, 
+  albumEntries, 
+  toggleCarousel, 
+  isImage,
+  setAlbumEntries,
+  isEven
+}) => {
 
   return (
-    <div className={`Page ${!isVisible ? "hidden" : ""} ${isEven ? "even" : "odd"}`}>
-      {albumEntries.map((entry, index) => {
-        if (!isEven) {
-          return (
-            index < 4 && <AlbumEntry
-              key={entry._id} 
-              entry={entry} 
-              index={index} 
-              toggleCarousel={toggleCarousel} 
-              isImage={isImage}
-            />
-          );
-        } else {
-          return (
-            index >=4 && <AlbumEntry
-              key={entry._id} 
-              entry={entry} 
-              index={index} 
-              toggleCarousel={toggleCarousel}
-              isImage={isImage}
-            />
-          );
-        }
-      })}
-      
+    <div className={`Page ${isEven ? "even" : "odd"}`}>
+      {albumEntries.map((entry, index) => <AlbumEntry
+        key={entry._id} 
+        entry={entry} 
+        index={index} 
+        toggleCarousel={toggleCarousel} 
+        isImage={isImage}
+        setAlbumEntries={setAlbumEntries}
+      />)}
       <div className="page-footer">{pageNumber}</div>
     </div>
   );

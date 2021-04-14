@@ -8,11 +8,11 @@ import { getAlbumEntriesByPage } from '../../services/albumEntriesService';
 
 import './PhotoAlbum.scss';
 
+const ENTRIES_PER_PAGE = 4;
+
 class PhotoAlbum extends Component {
 
   state = {
-    leftPage: 1,
-    rightPage: 2,
     isCarouselOpen: false,
     selectedEntry: {
       data: {},
@@ -26,7 +26,11 @@ class PhotoAlbum extends Component {
   }
 
   componentDidMount() {
-    getAlbumEntriesByPage(this.state.pageIndex, this.state.pageSize)
+    this.setAlbumEntries();
+  }
+
+  setAlbumEntries = (pageIndex=this.state.pageIndex, pageSize=this.state.pageSize) => {
+    getAlbumEntriesByPage(pageIndex, pageSize)
       .then(response => {
         this.setState({ 
           albumEntries: response.response.grid,
@@ -36,22 +40,18 @@ class PhotoAlbum extends Component {
       .catch(error => console.log(error));
   }
 
-  isVisible = (pageNumber) => (pageNumber === this.state.leftPage || pageNumber === this.state.rightPage);
-
   // page to flip to
   flipPage = (flipTo) => {
-    if (flipTo === 'PREV') {
-      this.setState(prevState => ({
-        leftPage: prevState.leftPage - 2,
-        rightPage: prevState.rightPage - 2
-      }));
-    }
-    if (flipTo === 'NEXT') {
-      this.setState(prevState => ({
-        leftPage: prevState.leftPage + 2,
-        rightPage: prevState.rightPage + 2
-      }));
-    }
+    this.setState(prevState => {
+      let pageIndex = prevState.pageIndex;
+      if (flipTo === "PREV") {
+        --pageIndex;
+      } else {
+        ++pageIndex;
+      }
+      this.setAlbumEntries(pageIndex);
+      return { pageIndex };
+    })
   };
 
   toggleCarousel = (selectedEntry = {}) => {
@@ -89,10 +89,10 @@ class PhotoAlbum extends Component {
 
   render() {
     const {
-      leftPage,
-      rightPage,
       isCarouselOpen,
       selectedEntry,
+      pageIndex,
+      pageSize,
       albumEntries,
       totalCount,
       isCreateFormOpen
@@ -110,28 +110,39 @@ class PhotoAlbum extends Component {
     }
     return (
       <div className="PhotoAlbumContainer">
-        {isCreateFormOpen && <CreateEntryForm setIsOpen={this.toggleCreateEntryModal}/>}
+        {isCreateFormOpen && <CreateEntryForm 
+          setIsOpen={this.toggleCreateEntryModal}
+          setAlbumEntries={this.setAlbumEntries}
+        />}
         <div className="create-album-entry">
           <div title="Add photo" onClick={() => this.setState({ isCreateFormOpen: true })}>+</div>
         </div>
         <div className="PhotoAlbum">
-          {albumEntries?.length && [...Array(Math.ceil(totalCount/4))].map((e, index) => 
+          {albumEntries?.length && <>
             <Page
-              key={index}
-              pageNumber={index+1}
-              isVisible={this.isVisible(index+1)} 
-              albumEntries={albumEntries}
+              pageNumber={pageIndex*2+1}
+              albumEntries={albumEntries.slice(0, ENTRIES_PER_PAGE)}
               toggleCarousel={this.toggleCarousel}
               isImage={this.isImage}
+              setAlbumEntries={this.setAlbumEntries}
+              isEven={false}
             />
-          )}
+            <Page
+              pageNumber={pageIndex*2+2}
+              albumEntries={albumEntries.slice(ENTRIES_PER_PAGE, ENTRIES_PER_PAGE*2)}
+              toggleCarousel={this.toggleCarousel}
+              isImage={this.isImage}
+              setAlbumEntries={this.setAlbumEntries}
+              isEven={true}
+            />
+          </>}
         </div>
         <div className="pagination">
           <div className="prev-page">
-            {leftPage > 1 && <div className="prev-btn" onClick={() => this.flipPage('PREV')}>Prev Page</div>}
+            {pageIndex > 0 && <div className="prev-btn" onClick={() => this.flipPage('PREV')}>Prev Page</div>}
           </div>
           <div className="next-page">
-            {rightPage < totalCount && <div className="next-btn" onClick={() => this.flipPage('NEXT')}>Next Page</div>}
+            {(totalCount > (pageIndex+1)*pageSize) && <div className="next-btn" onClick={() => this.flipPage('NEXT')}>Next Page</div>}
           </div>
         </div>
       </div>

@@ -3,13 +3,17 @@ import DeleteWarning from '../Modals/DeleteWarning';
 
 import './AlbumEntry.scss';
 
-const AlbumEntry = ({ entry, index, toggleCarousel, isImage }) => {
+const AlbumEntry = ({ entry, index, toggleCarousel, isImage, setAlbumEntries }) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="AlbumEntry">
-      {isOpen && <DeleteWarning albumEntryId={entry._id} setIsOpen={setIsOpen}/>}
+      {isOpen && <DeleteWarning 
+        albumEntryId={entry._id} 
+        setIsOpen={setIsOpen}
+        setAlbumEntries={setAlbumEntries}
+      />}
       <div 
         className="container"
         onClick={(e) => {

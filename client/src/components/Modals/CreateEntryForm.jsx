@@ -4,7 +4,7 @@ import { createAlbumEntry } from '../../services/albumEntriesService';
 
 import './CreateEntryForm.scss';
 
-const CreateEntryForm = ({ setIsOpen }) => {
+const CreateEntryForm = ({ setIsOpen, setAlbumEntries }) => {
   
   const [file, setFile] = useState(null);
   const [dateCaptured, setDateCaptured] = useState("");
@@ -17,11 +17,15 @@ const CreateEntryForm = ({ setIsOpen }) => {
     formData.append("file", file, file.name);
     uploadFile(formData)
       .then(response => {
-        createAlbumEntry({
+        return createAlbumEntry({
           mediaUrl: response.data.url, 
           dateCaptured: dateCaptured,
           description: description
         })
+      })
+      .then(response => {
+        setAlbumEntries();
+        setIsOpen(false);
       })
       .catch(error => console.log("Create Error", error));
   };
