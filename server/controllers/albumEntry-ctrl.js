@@ -77,7 +77,11 @@ deleteAlbumEntry = async (req, res) => {
             return res.status(400).json({ success: false, error: err })
         }
 
-        return res.status(200).json({ success: true, data: albumEntry });
+        return res.status(200).json({ 
+            success: true, 
+            id: req.params.id, 
+            message: 'Album Entry successfully deleted' 
+        });
     }).catch(err => console.log(err));
 }
 
@@ -96,21 +100,6 @@ getAlbumEntryById = async (req, res) => {
         return res.status(200).json({ success: true, data: albumEntry });
     }).catch(err => console.log(err));
 }
-
-// getAlbumEntries = async (req, res) => {
-//     await AlbumEntry.find({}, (err, albumEntries) => {
-//         if (err) {
-//             return res.status(400).json({ success: false, error: err });
-//         }
-//         if (!albumEntries.length) {
-//             return res.status(404).json({
-//                 success: false,
-//                 error: 'Album Entries not found'
-//             });
-//         }
-//         return res.status(200).json({ success: true, data: albumEntries });
-//     }).catch(err => console.log(err));
-// }
 
 getAlbumEntriesByPage = async (req, res) => {
     const page = parseInt(req.query.page) || 0;
@@ -135,7 +124,6 @@ getAlbumEntriesByPage = async (req, res) => {
                 }
             })
         })
-
 }
 
 module.exports = {
@@ -143,6 +131,5 @@ module.exports = {
     updateAlbumEntry,
     deleteAlbumEntry,
     getAlbumEntryById,
-    // getAlbumEntries,
     getAlbumEntriesByPage
 }
