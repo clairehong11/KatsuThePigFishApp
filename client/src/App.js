@@ -1,10 +1,10 @@
-import PhotoAlbum from './components/PhotoAlbum/PhotoAlbum';
+import PhotoAlbumContainer from './components/PhotoAlbumContainer/PhotoAlbumContainer';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <PhotoAlbum/>
+      <PhotoAlbumContainer/>
     </div>
   );
 }

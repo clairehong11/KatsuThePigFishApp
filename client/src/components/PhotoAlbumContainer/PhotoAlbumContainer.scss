@@ -1,0 +1,29 @@
+.PhotoAlbumContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .prev-page,
+  .next-page {
+    width: 5%;
+    .prev-btn,
+    .next-btn {
+      cursor: pointer;
+      padding: 2px 8px 4px;
+      background-color: brown;
+      color: white;
+      width: fit-content;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .next-btn {
+      float: right;
+    }
+  }
+}

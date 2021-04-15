@@ -1,0 +1,61 @@
+.Page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+
+  $pageLength: 7;
+  $pageGap: 1;
+  $color: #d1b786;
+
+  &.even {
+    $pages: 1px -1px 0 darken(whiteSmoke, 10%);
+    @for $i from 2 through $pageLength {
+      $pages: $pages,
+        #{$i *
+          $pageGap}px -#{$i *
+          $pageGap}px
+          0
+          darken(whiteSmoke, ($i * (35 / $pageLength)));
+    }
+    $bounder: #{$pageLength * $pageGap + 1}px -#{$pageLength * $pageGap + 1}px 0
+      darken($color, 35%);
+    @for $i from 0 through $pageLength {
+      $bounder: $bounder,
+        #{$i * $pageGap}px #{-1 - $i * $pageGap}px 0px darken($color, 35%);
+    }
+    border-radius: 2px 20px 20px 2px;
+    border: 1px solid darken($color, 30%);
+    box-shadow: $pages, $bounder, 8px 5px 20px 4px rgba(black, 0.8);
+  }
+
+  &.odd {
+    $pages: -1px -1px 0 darken(whiteSmoke, 10%);
+    @for $i from 2 through $pageLength {
+      $pages: $pages,
+        -#{$i *
+          $pageGap}px -#{$i *
+          $pageGap}px
+          0
+          darken(whiteSmoke, ($i * (35 / $pageLength)));
+    }
+    $bounder: -#{$pageLength * $pageGap + 1}px -#{$pageLength * $pageGap + 1}px
+      0 darken($color, 35%);
+    @for $i from 0 through $pageLength {
+      $bounder: $bounder,
+        -#{$i * $pageGap}px #{-1 - $i * $pageGap}px 0px darken($color, 35%);
+    }
+    box-shadow: $pages, $bounder, -8px 0 20px 4px rgba(black, 0.8);
+    border: 1px solid darken($color, 35%);
+    border-radius: 20px 2px 2px 20px;
+  }
+
+  .page-footer {
+    position: absolute;
+    bottom: 5px;
+    text-align: center;
+  }
+}

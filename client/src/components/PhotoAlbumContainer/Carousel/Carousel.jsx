@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import isImage from '../../../utils/isImage';
 
 import './Carousel.scss';
 
-const Carousel = ({ toggleCarousel, selectedEntry, setSelectedEntry, isImage }) => {
+const Carousel = ({ toggleCarousel, selectedEntry, setSelectedEntry }) => {
   useEffect(() => {
     const navigateCarousel = (e) => {
       if (e.keyCode === 37) {

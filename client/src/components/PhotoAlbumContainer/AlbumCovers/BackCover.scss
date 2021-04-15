@@ -1,0 +1,61 @@
+.BackCover {
+  $color: #d1b786;
+  $pages: -1px -1px 0 darken(whiteSmoke, 10%);
+  $pageLength: 10;
+  $pageGap: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  height: 100%;
+  background-image: url("https://katsuthepigfish.s3-us-west-1.amazonaws.com/vintage-concrete.png");
+  background-size: cover;
+  border-radius: 20px 2px 2px 20px;
+  border: 1px solid darken($color, 30%);
+
+  @for $i from 2 through $pageLength {
+    $pages: $pages,
+      -#{$i *
+        $pageGap}px -#{$i *
+        $pageGap}px
+        0
+        darken(whiteSmoke, ($i * (35 / $pageLength)));
+  }
+  $bounder: -#{$pageLength * $pageGap + 1}px -#{$pageLength * $pageGap + 1}px 0
+    darken($color, 35%);
+  @for $i from 0 through $pageLength {
+    $bounder: $bounder,
+      -#{$i * $pageGap}px #{-1 - $i * $pageGap}px 0px darken($color, 35%);
+  }
+  box-shadow: $pages, $bounder, -8px -5px 20px 4px rgba(black, 0.8);
+
+  .fade {
+    $binding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba($color, 0.3);
+    width: 100%;
+    height: 100%;
+    border-radius: 20px 2px 2px 20px;
+    position: relative;
+    right: $binding;
+    box-shadow: #{$binding} 0 0 rgba(darken($color, 20%), 0.3),
+      #{$binding} 0 0 rgba(darken($color, 20%), 0.7);
+
+    p {
+      $shadow: rgba(darken($color, 20%), 0.7);
+      text-shadow: 1px 1px 1px $shadow, 0 -1px 0 $shadow;
+      font-size: 18px;
+      font-style: italic;
+      color: lighten(black, 10%);
+      margin: 0;
+      padding: 0 50px;
+      text-align: center;
+    }
+  }
+}

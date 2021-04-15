@@ -1,13 +1,12 @@
 import React from 'react';
-import AlbumEntry from './AlbumEntry';
+import AlbumEntry from '../AlbumEntry/AlbumEntry';
 
-import './Page.scss';
+import './AlbumPage.scss';
 
-const Page = ({ 
+const AlbumPage = ({ 
   pageNumber, 
   albumEntries, 
   toggleCarousel, 
-  isImage,
   setAlbumEntries,
   isEven
 }) => {
@@ -19,7 +18,6 @@ const Page = ({
         entry={entry} 
         index={index} 
         toggleCarousel={toggleCarousel} 
-        isImage={isImage}
         setAlbumEntries={setAlbumEntries}
       />)}
       <div className="page-footer">{pageNumber}</div>
@@ -27,4 +25,4 @@ const Page = ({
   );
 };
 
-export default Page;
+export default AlbumPage;
