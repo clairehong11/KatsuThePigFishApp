@@ -29,7 +29,8 @@ class PhotoAlbum extends Component {
       .then(response => {
         this.setState({ 
           albumEntries: response.response.grid,
-          lastPage: Math.ceil(response.response.totalCount/pageSize)
+          lastPage: Math.ceil(response.response.totalCount/pageSize),
+          pageIndex: pageIndex
         })
       })
       .catch(error => console.log(error));
@@ -37,16 +38,17 @@ class PhotoAlbum extends Component {
 
   // page to flip to
   flipPage = (flipTo) => {
-    this.setState(prevState => {
-      let pageIndex = prevState.pageIndex;
-      if (flipTo === "PREV") {
-        --pageIndex;
-      } else {
-        ++pageIndex;
-      }
-      this.setAlbumEntries(pageIndex);
-      return { pageIndex };
-    })
+    let pageIndex = this.state.pageIndex;
+    if (flipTo === "PREV") {
+      --pageIndex;
+    } else {
+      ++pageIndex;
+    }
+    if (pageIndex === -1) {
+      this.setState({ pageIndex });
+    } else {
+      this.setAlbumEntries(pageIndex);  
+    }
   };
 
   toggleCarousel = (selectedEntry = {}) => {
