@@ -1,0 +1,56 @@
+.Loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .loader-wrapper {
+    display: flex;
+    width: 750px;
+    justify-content: space-between;
+
+    [class*="paw-print-"] {
+      width: 75px;
+    }
+
+    .paw-print-1 {
+      opacity: 0;
+      transform: rotate(80deg);
+      animation: walk 1.5s linear infinite 0s;
+    }
+    .paw-print-2 {
+      opacity: 0;
+      transform: rotate(95deg);
+      padding-right: 100px;
+      animation: walk 1.5s linear infinite 0.25s;
+    }
+    .paw-print-3 {
+      opacity: 0;
+      transform: rotate(70deg);
+      padding-left: 20px;
+      animation: walk 1.5s linear infinite 0.5s;
+    }
+    .paw-print-4 {
+      opacity: 0;
+      transform: rotate(90deg);
+      padding-right: 100px;
+      animation: walk 1.5s linear infinite 0.75s;
+    }
+  }
+  p {
+    font-weight: bold;
+    font-size: 24px;
+    padding-top: 50px;
+  }
+}
+
+@keyframes walk {
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

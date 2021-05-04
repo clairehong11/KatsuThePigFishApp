@@ -4,6 +4,7 @@ import Carousel from './Carousel/Carousel';
 import FrontCover from './AlbumCovers/FrontCover';
 import OpenPhotoAlbum from './OpenPhotoAlbum/OpenPhotoAlbum';
 import BackCover from './AlbumCovers/BackCover';
+import Loader from '../common/Loader';
 
 import { getAlbumEntriesByPage } from '../../services/albumEntriesService';
 
@@ -21,16 +22,19 @@ class PhotoAlbum extends Component {
     },
     pageIndex: -1,
     albumEntries: [],
-    lastPage: 0
+    lastPage: 0,
+    isLoading: false
   }
 
   setAlbumEntries = (pageIndex=this.state.pageIndex, pageSize=PAGE_SIZE) => {
+    this.setState({ isLoading: true });
     getAlbumEntriesByPage(pageIndex, pageSize)
       .then(response => {
         this.setState({ 
           albumEntries: response.response.grid,
           lastPage: Math.ceil(response.response.totalCount/pageSize),
-          pageIndex: pageIndex
+          pageIndex: pageIndex,
+          isLoading: false
         })
       })
       .catch(error => console.log(error));
@@ -78,9 +82,15 @@ class PhotoAlbum extends Component {
       selectedEntry,
       pageIndex,
       albumEntries,
-      lastPage
+      lastPage,
+      isLoading
     } = this.state;
 
+    if (isLoading) {
+      return (
+        <Loader/>
+      );
+    }
     if (isCarouselOpen) {
       return (
         <Carousel 
