@@ -7,12 +7,16 @@ import './CreateEntryForm.scss';
 const CreateEntryForm = ({ setIsOpen, setAlbumEntries }) => {
   
   const [file, setFile] = useState(null);
+  const [isFileMissing, setIsFileMissing] = useState(false);
   const [dateCaptured, setDateCaptured] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
 
+    if (!file) {
+      return setIsFileMissing(true);
+    }
     const formData = new FormData();
     formData.append("file", file, file.name);
     uploadFile(formData)
@@ -46,8 +50,12 @@ const CreateEntryForm = ({ setIsOpen, setAlbumEntries }) => {
                 type="file"
                 name="mediaFile"
                 accept=".jpg, .jpeg, .png, .mp4, .mov" 
-                onChange={e => setFile(e.target.files[0])}
+                onChange={e => {
+                  setFile(e.target.files[0]);
+                  setIsFileMissing(false);
+                }}
               />
+              {isFileMissing && <span className="error">Please upload a file. Accepted file formats are .jpg, .jpeg, .png, .mp4, and .mov.</span>}
             </div>
             <div className="form-field">
               <label htmlFor="date-captured">Date taken:</label>
