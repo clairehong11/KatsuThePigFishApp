@@ -50,7 +50,6 @@ updateAlbumEntry = async (req, res) => {
                 message: 'Album Entry not found'
             })
         }
-        albumEntry.mediaUrl = body.mediaUrl;
         albumEntry.description = body.description;
         albumEntry.dateCaptured = body.dateCaptured;
         albumEntry
