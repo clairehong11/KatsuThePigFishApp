@@ -1,0 +1,33 @@
+.Toolbar {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  font-weight: bold;
+  cursor: pointer;
+  padding-top: 8px;
+
+  .toggle-create-entry-form,
+  .toggle-edit-mode {
+    display: none;
+    padding: 8px;
+    margin-right: 8px;
+
+    &.selected {
+      display: flex;
+      background-color: brown;
+      color: white;
+    }
+  }
+  .expand-toolbar-btn {
+    display: flex;
+    padding: 8px;
+  }
+
+  &:hover {
+    .toggle-create-entry-form,
+    .toggle-edit-mode {
+      display: flex;
+    }
+  }
+}

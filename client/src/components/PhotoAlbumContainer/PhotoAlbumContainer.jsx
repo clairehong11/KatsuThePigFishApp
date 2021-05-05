@@ -5,6 +5,7 @@ import FrontCover from './AlbumCovers/FrontCover';
 import OpenPhotoAlbum from './OpenPhotoAlbum/OpenPhotoAlbum';
 import BackCover from './AlbumCovers/BackCover';
 import Loader from '../common/Loader';
+import Toolbar from '../Toolbar/Toolbar';
 
 import { getAlbumEntriesByPage } from '../../services/albumEntriesService';
 
@@ -23,7 +24,8 @@ class PhotoAlbum extends Component {
     pageIndex: -1,
     albumEntries: [],
     lastPage: 0,
-    isLoading: false
+    isLoading: false,
+    isEditMode: false
   }
 
   setAlbumEntries = (pageIndex=this.state.pageIndex, pageSize=PAGE_SIZE) => {
@@ -76,6 +78,12 @@ class PhotoAlbum extends Component {
     this.setState({ selectedEntry: selectedEntry });
   };
 
+  toggleEditMode = () => {
+    this.setState(prevState => ({
+      isEditMode: !prevState.isEditMode 
+    }));
+  };
+
   render() {
     const {
       isCarouselOpen,
@@ -83,7 +91,8 @@ class PhotoAlbum extends Component {
       pageIndex,
       albumEntries,
       lastPage,
-      isLoading
+      isLoading,
+      isEditMode
     } = this.state;
 
     if (isLoading) {
@@ -102,24 +111,34 @@ class PhotoAlbum extends Component {
       );
     }
     return (
-      <div className="PhotoAlbumContainer">
-        <div className="prev-page">
-          {pageIndex > -1 && <div className="prev-btn" onClick={() => this.flipPage('PREV')}>&lsaquo;</div>}
-        </div>
+      <>
+        {(pageIndex !== -1 && pageIndex !== lastPage) && 
+          <Toolbar
+            setAlbumEntries={this.setAlbumEntries}
+            isEditMode={isEditMode}
+            toggleEditMode={this.toggleEditMode}
+          />
+        }
+        <div className="PhotoAlbumContainer">
+          <div className="prev-page">
+            {pageIndex > -1 && <div className="prev-btn" onClick={() => this.flipPage('PREV')}>&lsaquo;</div>}
+          </div>
 
-        {pageIndex === -1 ? <FrontCover/> : 
-          (pageIndex === lastPage) ? <BackCover/> :
-            <OpenPhotoAlbum
-              albumEntries={albumEntries}
-              pageIndex={pageIndex}
-              toggleCarousel={this.toggleCarousel}
-              setAlbumEntries={this.setAlbumEntries}
-            />}
-        
-        <div className="next-page">
-          {(pageIndex < lastPage) && <div className="next-btn" onClick={() => this.flipPage('NEXT')}>&rsaquo;</div>}
+          {pageIndex === -1 ? <FrontCover/> : 
+            (pageIndex === lastPage) ? <BackCover/> :
+              <OpenPhotoAlbum
+                albumEntries={albumEntries}
+                pageIndex={pageIndex}
+                toggleCarousel={this.toggleCarousel}
+                setAlbumEntries={this.setAlbumEntries}
+                isEditMode={isEditMode}
+              />}
+          
+          <div className="next-page">
+            {(pageIndex < lastPage) && <div className="next-btn" onClick={() => this.flipPage('NEXT')}>&rsaquo;</div>}
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 }

@@ -8,7 +8,8 @@ const AlbumPage = ({
   albumEntries, 
   toggleCarousel, 
   setAlbumEntries,
-  isEven
+  isEven,
+  isEditMode
 }) => {
 
   return (
@@ -19,6 +20,7 @@ const AlbumPage = ({
         index={index} 
         toggleCarousel={toggleCarousel} 
         setAlbumEntries={setAlbumEntries}
+        isEditMode={isEditMode}
       />)}
       <div className="page-footer">{pageNumber}</div>
     </div>

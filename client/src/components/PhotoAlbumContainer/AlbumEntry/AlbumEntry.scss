@@ -10,25 +10,7 @@
     position: relative;
     height: 100%;
     cursor: pointer;
-    .delete-btn {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      opacity: 0;
-      background-color: black;
-      transition: 0.3s;
-      display: flex;
-      justify-content: center;
-      height: 24px;
-      width: 24px;
-      color: white;
-      border-radius: 50%;
-      font-weight: bold;
-      z-index: 2;
-    }
-    &:hover .delete-btn {
-      opacity: 0.8;
-    }
+
     img,
     video {
       width: 100%;
@@ -62,6 +44,37 @@
     }
     &:hover .overlay {
       opacity: 0.7;
+    }
+
+    &.edit-mode {
+      border: 1px dashed brown;
+
+      .edit-mode-actions {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+        // background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(150, 0, 0, 0.8);
+        color: white;
+        padding: 1px 4px;
+
+        .edit-btn {
+          width: 24px;
+          height: 24px;
+          background: center / contain no-repeat
+            url("https://katsuthepigfish.s3-us-west-1.amazonaws.com/edit-icon.png");
+          padding-right: 10px;
+          filter: invert(100%);
+        }
+        .delete-btn {
+          display: flex;
+          margin-top: -4px;
+          font-weight: bold;
+          font-size: 24px;
+          padding-right: 6px;
+        }
+      }
     }
   }
 }
