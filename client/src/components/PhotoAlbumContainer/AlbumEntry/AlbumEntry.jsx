@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import UpdateEntryForm from '../../Modals/UpdateEntryForm';
 import DeleteWarning from '../../Modals/DeleteWarning';
 import isImage from '../../../utils/isImage';
 
@@ -13,19 +14,28 @@ const AlbumEntry = ({
   isEditMode 
 }) => {
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   return (
     <div className="AlbumEntry">
-      {isOpen && <DeleteWarning 
-        albumEntryId={entry._id} 
-        setIsOpen={setIsOpen}
+
+      {isUpdateModalOpen && <UpdateEntryForm
+        entry={entry}
+        setIsOpen={setIsUpdateModalOpen}
         setAlbumEntries={setAlbumEntries}
       />}
+
+      {isDeleteModalOpen && <DeleteWarning 
+        albumEntryId={entry._id} 
+        setIsOpen={setIsDeleteModalOpen}
+        setAlbumEntries={setAlbumEntries}
+      />}
+
       <div 
-        className={`container ${isEditMode ? "edit-mode" : ""}`}
+        className={`entry-container ${isEditMode ? "edit-mode" : ""}`}
         onClick={(e) => {
-          if (e.target.className !== "delete-btn") {
+          if (e.target.className !== "edit-btn" && e.target.className !== "delete-btn") {
             toggleCarousel({ data: entry, index })
           }
         }}
@@ -34,12 +44,12 @@ const AlbumEntry = ({
           <div 
             className="edit-btn" 
             id={entry._id} 
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsUpdateModalOpen(true)}
           />
           <div 
             className="delete-btn" 
             id={entry._id} 
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsDeleteModalOpen(true)}
           >
             &times;
           </div>

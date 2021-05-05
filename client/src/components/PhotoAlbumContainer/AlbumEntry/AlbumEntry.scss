@@ -6,7 +6,7 @@
   box-sizing: border-box;
   position: relative;
   justify-content: center;
-  .container {
+  .entry-container {
     position: relative;
     height: 100%;
     cursor: pointer;
@@ -58,6 +58,7 @@
         background-color: rgba(150, 0, 0, 0.8);
         color: white;
         padding: 1px 4px;
+        right: 0;
 
         .edit-btn {
           width: 24px;

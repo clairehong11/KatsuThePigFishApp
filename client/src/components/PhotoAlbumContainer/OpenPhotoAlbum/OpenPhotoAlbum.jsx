@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import AlbumPage from '../AlbumPage/AlbumPage';
+import CreateEntryForm from '../../Modals/CreateEntryForm';
 
 import './OpenPhotoAlbum.scss';
 
@@ -14,8 +15,19 @@ const OpenPhotoAlbum = ({
   isEditMode
 }) => {
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="OpenPhotoAlbum">
+      {isOpen && <CreateEntryForm 
+          setIsOpen={setIsOpen}
+          setAlbumEntries={setAlbumEntries}
+        />}
+
+      {isEditMode && <div className="create-album-entry">
+        <div title="Add photo" onClick={() => setIsOpen(true)}>+</div>
+      </div>}
+
       {albumEntries?.length && <>
         <AlbumPage
           pageNumber={pageIndex*2+1}

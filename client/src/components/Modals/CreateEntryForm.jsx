@@ -42,7 +42,7 @@ const CreateEntryForm = ({ setIsOpen, setAlbumEntries }) => {
 
   return (
     <div className="CreateEntryForm" onClick={handleClickOutside}>
-      <div className="container">
+      <div className="form-container">
         <h2>Add Album Entry</h2>
           <form>
             <div className="form-field">

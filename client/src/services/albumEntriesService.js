@@ -8,10 +8,13 @@ const getAlbumEntriesByPage = (pageIndex, pageSize) => api.get(`/albumEntries?pa
 
 const createAlbumEntry = requestData => api.post('/albumEntry', requestData);
 
-const deleteAlbumEntry = albumEntryId => api.delete(`albumEntry/${albumEntryId}`);
+const updateAlbumEntry = (albumEntryId, requestData) => api.put(`/albumEntry/${albumEntryId}`, requestData);
+
+const deleteAlbumEntry = albumEntryId => api.delete(`/albumEntry/${albumEntryId}`);
 
 export {
     getAlbumEntriesByPage,
     createAlbumEntry,
+    updateAlbumEntry,
     deleteAlbumEntry
 }
