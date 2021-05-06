@@ -120,9 +120,11 @@ class PhotoAlbum extends Component {
           />
         }
         <div className="PhotoAlbumContainer">
-          <div className="prev-page">
-            {pageIndex > -1 && <div className="prev-btn" onClick={() => this.flipPage('PREV')}>&lsaquo;</div>}
-          </div>
+          {pageIndex > -1 && <div className="prev-page">
+            <span className="prev-btn" onClick={() => this.flipPage('PREV')}>
+              <i className="arrow"/>
+            </span>
+          </div>}
 
           {pageIndex === -1 ? <FrontCover/> : 
             (pageIndex === lastPage) ? <BackCover/> :
@@ -133,10 +135,13 @@ class PhotoAlbum extends Component {
                 setAlbumEntries={this.setAlbumEntries}
                 isEditMode={isEditMode}
               />}
-          
-          <div className="next-page">
-            {(pageIndex < lastPage) && <div className="next-btn" onClick={() => this.flipPage('NEXT')}>&rsaquo;</div>}
-          </div>
+
+          {(pageIndex < lastPage) && <div className="next-page">
+            <span className="next-btn" onClick={() => this.flipPage('NEXT')}>
+              <i className="arrow"/>
+            </span>
+          </div>}
+
         </div>
       </>
     )

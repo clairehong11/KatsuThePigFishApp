@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 85%;
+  width: 95%;
   height: 85%;
   display: flex;
   align-items: center;
@@ -11,19 +11,42 @@
 
   .prev-page,
   .next-page {
-    width: 5%;
+    margin: 0 50px;
+
     .prev-btn,
     .next-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      width: 28px;
+      height: 28px;
+      background-color: #0e2677;
+      border: 1px solid #0e2677;
+      border-radius: 100%;
       cursor: pointer;
-      padding: 2px 8px 4px;
-      background-color: brown;
-      color: white;
-      width: fit-content;
-      font-size: 20px;
-      font-weight: bold;
+
+      .arrow {
+        display: inline-block;
+        border: solid white;
+        border-width: 0 4px 4px 0;
+        padding: 4px;
+      }
+    }
+
+    .prev-btn {
+      float: left;
+      .arrow {
+        transform: rotate(135deg);
+        margin-right: -4px;
+      }
     }
     .next-btn {
       float: right;
+      .arrow {
+        transform: rotate(-45deg);
+        margin-left: -4px;
+      }
     }
   }
 }
