@@ -5,11 +5,14 @@ const api = axios.create({
 });
 
 const uploadFile = formData => {
-  return api.post('/upload', formData, {
+  return api.post('/mediaFile/upload', formData, {
     headers: { "Content-Type": "multipart/form-data" }
   });
-}
+};
+
+const deleteFile = requestData => api.post('/mediaFile/delete', requestData).then(response => response.data);
 
 export {
     uploadFile,
+    deleteFile
 }

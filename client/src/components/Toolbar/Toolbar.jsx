@@ -15,9 +15,9 @@ const Toolbar = ({
   return (
     <>
       {isOpen && <CreateEntryForm 
-          setIsOpen={setIsOpen}
-          setAlbumEntries={setAlbumEntries}
-        />}
+        setIsOpen={setIsOpen}
+        setAlbumEntries={setAlbumEntries}
+      />}
 
       <div className="Toolbar">
         {isEditMode && <div className="create-btn">

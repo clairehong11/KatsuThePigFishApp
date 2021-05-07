@@ -27,7 +27,7 @@ const AlbumEntry = ({
       />}
 
       {isDeleteModalOpen && <DeleteWarning 
-        albumEntryId={entry._id} 
+        entry={entry} 
         setIsOpen={setIsDeleteModalOpen}
         setAlbumEntries={setAlbumEntries}
       />}

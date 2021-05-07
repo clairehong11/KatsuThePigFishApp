@@ -1,9 +1,24 @@
 import React from 'react';
+import { deleteFile } from '../../services/mediaFileService';
 import { deleteAlbumEntry } from '../../services/albumEntriesService';
 
 import './DeleteWarning.scss';
 
-const DeleteWarning = ({ albumEntryId, setIsOpen, setAlbumEntries }) => {
+const DeleteWarning = ({ entry, setIsOpen, setAlbumEntries }) => {
+
+  const handleDelete = () => {
+    deleteFile({ fileName: entry.mediaUrl.split("/").pop() })
+      .then(response => {
+        if (response.success) {
+          return deleteAlbumEntry(entry._id);
+        }
+      })
+      .then(response => {
+        setAlbumEntries();
+        setIsOpen(false);
+      })
+      .catch(err => console.log("Delete Error", err));
+  }
 
   const handleClickOutside = (e) => {
     if (e.target.className === "DeleteWarning") {
@@ -24,14 +39,7 @@ const DeleteWarning = ({ albumEntryId, setIsOpen, setAlbumEntries }) => {
           >
             Cancel
           </button>
-          <button type="button" onClick={() => {
-            deleteAlbumEntry(albumEntryId)
-              .then(response => {
-                setAlbumEntries();
-                setIsOpen(false);
-              })
-            }}
-          >
+          <button type="button" onClick={handleDelete}>
             Delete
           </button>
         </div>

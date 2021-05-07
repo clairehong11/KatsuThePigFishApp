@@ -12,15 +12,15 @@ uploadFile = (req, res) => {
     const body = req.body;
     if (!body) {
         return res.status(400).json({
-          success: false,
-          error: 'You must upload a file to create a new Album Entry'
+            success: false,
+            error: 'You must upload a file to create a new Album Entry'
         });
     }
 
     const form = formidable();
     form.parse(req, (err, fields, files) => {
         if (err) {
-          console.log('Error', err);
+            console.log('Error', err);
         }
         const file = files.file;
         const fileStream = fs.createReadStream(file.path);
@@ -49,6 +49,33 @@ uploadFile = (req, res) => {
     })
 }
 
-module.exports = {
-    uploadFile
+deleteFile = (req, res) => {
+    const body = req.body;
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide the file to delete.'
+        })
+    }
+
+    const params = {
+        Bucket: process.env.BUCKET,
+        Key: body.fileName
+    };
+    s3.deleteObject(params, (err, data) => {
+        if (err) {
+            console.log(err, err.stack);
+        } else {
+            console.log('Delete Success', data);
+            return res.status(200).json({
+                success: true,
+                message: "Storage object successfully deleted."
+            })
+        }
+    })
 }
+
+module.exports = {
+    uploadFile,
+    deleteFile
+};

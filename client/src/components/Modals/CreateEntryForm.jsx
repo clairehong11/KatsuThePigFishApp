@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { uploadFile } from '../../services/fileUploadService';
+import { uploadFile } from '../../services/mediaFileService';
 import { createAlbumEntry } from '../../services/albumEntriesService';
 
 import './CreateEntryForm.scss';
