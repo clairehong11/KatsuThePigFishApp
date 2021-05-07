@@ -54,7 +54,10 @@ const AlbumEntry = ({
             &times;
           </div>
         </div>}
-        {isImage(entry.mediaUrl) ? <img src={entry.mediaUrl} alt="Katsu"/> : <video controls>
+        {isImage(entry.mediaUrl) ? <img src={entry.mediaUrl} alt="Katsu"/> : <video 
+          controls 
+          onClick={e => e.preventDefault()}
+        >
           <source src={entry.mediaUrl} type="video/mp4"></source>
         </video>}
         
