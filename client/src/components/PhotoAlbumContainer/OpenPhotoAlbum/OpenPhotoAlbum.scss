@@ -6,20 +6,4 @@
   box-shadow: 4px 4px 28px rgba(0, 0, 0, 0.8);
   border: 1px ridge #999;
   border-radius: 20px;
-
-  .create-album-entry {
-    position: absolute;
-    z-index: 1;
-    div {
-      background-color: brown;
-      padding: 0 4px 4px;
-      color: white;
-      width: fit-content;
-      font-size: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 18px 2px 10px;
-      position: relative;
-    }
-  }
 }

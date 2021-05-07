@@ -3,15 +3,19 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 95%;
+  width: 90%;
   height: 85%;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .prev-page,
-  .next-page {
-    margin: 0 50px;
+  .pagination {
+    &.next-page {
+      margin-left: 50px;
+    }
+    &.prev-page {
+      margin-right: 50px;
+    }
 
     .prev-btn,
     .next-btn {
@@ -31,21 +35,14 @@
         border: solid white;
         border-width: 0 4px 4px 0;
         padding: 4px;
-      }
-    }
-
-    .prev-btn {
-      float: left;
-      .arrow {
-        transform: rotate(135deg);
-        margin-right: -4px;
-      }
-    }
-    .next-btn {
-      float: right;
-      .arrow {
-        transform: rotate(-45deg);
-        margin-left: -4px;
+        &.left {
+          transform: rotate(135deg);
+          margin-right: -4px;
+        }
+        &.right {
+          transform: rotate(-45deg);
+          margin-left: -4px;
+        }
       }
     }
   }

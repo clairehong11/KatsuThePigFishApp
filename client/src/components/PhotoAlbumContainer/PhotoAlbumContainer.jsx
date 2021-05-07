@@ -120,9 +120,9 @@ class PhotoAlbum extends Component {
           />
         }
         <div className="PhotoAlbumContainer">
-          {pageIndex > -1 && <div className="prev-page">
+          {pageIndex > -1 && <div className="pagination prev-page">
             <span className="prev-btn" onClick={() => this.flipPage('PREV')}>
-              <i className="arrow"/>
+              <i className="arrow left"/>
             </span>
           </div>}
 
@@ -136,9 +136,9 @@ class PhotoAlbum extends Component {
                 isEditMode={isEditMode}
               />}
 
-          {(pageIndex < lastPage) && <div className="next-page">
+          {(pageIndex < lastPage) && <div className="pagination next-page">
             <span className="next-btn" onClick={() => this.flipPage('NEXT')}>
-              <i className="arrow"/>
+              <i className="arrow right"/>
             </span>
           </div>}
 

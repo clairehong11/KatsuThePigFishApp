@@ -7,14 +7,21 @@
   cursor: pointer;
   padding-top: 8px;
 
+  .create-btn {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+
   .toggle-edit-mode {
     padding: 8px;
     margin-right: 8px;
 
     &.selected {
       display: flex;
-      background-color: brown;
-      color: white;
+      background-color: white;
+      border: 2px solid black;
+      box-shadow: 0 0 4px 1px gray;
     }
   }
 }

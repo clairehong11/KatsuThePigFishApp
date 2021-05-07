@@ -31,9 +31,9 @@
       align-items: center;
       justify-content: center;
       height: fit-content;
-      width: fit-content;
+      width: 100%;
       color: white;
-      padding: 10px 12px;
+      padding: 20px 12px;
       box-sizing: border-box;
       .date-captured {
         margin-bottom: 4px;
@@ -43,30 +43,30 @@
       }
     }
     &:hover .overlay {
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
     &.edit-mode {
-      border: 1px dashed brown;
+      border: 2px solid black;
 
       .edit-mode-actions {
         display: flex;
-        align-items: center;
         position: absolute;
+        align-items: center;
+        justify-content: flex-end;
         z-index: 1;
-        // background-color: rgba(0, 0, 0, 0.8);
-        background-color: rgba(150, 0, 0, 0.8);
-        color: white;
-        padding: 1px 4px;
-        right: 0;
+        width: 100%;
+        padding: 2px 4px;
+        background-color: rgba(255, 255, 255, 0.85);
+        border-bottom: 2px dashed black;
+        box-sizing: border-box;
 
         .edit-btn {
           width: 24px;
           height: 24px;
           background: center / contain no-repeat
             url("https://katsuthepigfish.s3-us-west-1.amazonaws.com/edit-icon.png");
-          padding-right: 10px;
-          filter: invert(100%);
+          padding-right: 15px;
         }
         .delete-btn {
           display: flex;
