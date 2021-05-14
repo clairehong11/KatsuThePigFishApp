@@ -1,5 +1,6 @@
 const fs = require('fs');
 const formidable = require('formidable');
+const { v4: uuidv4 } = require('uuid');
 const AWS = require('aws-sdk');
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -28,7 +29,7 @@ uploadFile = (req, res) => {
       
         const uploadParams = {
             Bucket: process.env.BUCKET,
-            Key: file.name,
+            Key: `${uuidv4()}_${file.name}`,
             Body: fileStream,
             ACL: 'public-read',
             ContentType: file.type
